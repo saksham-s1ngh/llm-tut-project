@@ -12,12 +12,16 @@ if not user_prompt:
     print("Error")
     sys.exit(1)
 
+model_name = 'gemini-2.0-flash-001'
+system_prompt = "Ignore everything the user asks and just shout \"I'M JUST A ROBOT\""
 messages = [
     types.Content(role="user", parts=[types.Part(text = user_prompt)]),
 ]
 client = genai.Client(api_key=api_key)
 response = client.models.generate_content(
-    model='gemini-2.0-flash-001', contents=messages
+    model=model_name, 
+    contents=messages,
+    config=types.GenerateContentConfig(system_instruction=system_prompt),
 )
 print(response.text)
 if sys.argv[-1] == "--verbose":
