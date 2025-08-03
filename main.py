@@ -36,9 +36,10 @@ def main():
     print(generate_content(client, messages, verbose))
     
 def generate_content(client, messages, verbose):
-    # model_name = 'gemini-2.0-flash-001'
+    model_name = 'gemini-2.0-flash-001'
     response = client.models.generate_content(
-        model='gemini-2.0-flash-001', 
+        # model='gemini-2.0-flash-001', 
+        model = model_name,
         contents=messages,
         config=types.GenerateContentConfig(
             tools=[available_functions], system_instruction=system_prompt
